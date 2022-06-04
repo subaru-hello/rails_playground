@@ -1,0 +1,108 @@
+# target_version:
+#   rubocop v0.34.2
+
+# 自動生成されるものはチェック対象から除外する
+require:
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "bin/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - "config/puma/*"
+
+##################### Style ##################################
+
+# redirect_to xxx and return のイディオムを維持したい
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+# do .. end から更にメソッドチェーンすると見づらいので
+# auto-correct せず、自分で修正する
+# spec 内は見た目が綺麗になるので許可
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - "spec/**/*"
+
+
+# Style/CollectionMethods 自体は無効になっているのだが、
+#   https://github.com/bbatsov/rubocop/issues/1084
+#   https://github.com/bbatsov/rubocop/issues/1334
+# Performance/Detect がこの設定値を見るので PreferredMethods だけ変更しておく。
+#
+# デフォルト値から変えたのは
+#   find -> detect
+#     ActiveRecord の find と間違えやすいため
+#   reduce -> inject
+#     detect, reject, select と並べたときに韻を踏んでいるため。
+#     collect -> map を維持しているのは文字数が圧倒的に少ないため。
+Style/CollectionMethods:
+  PreferredMethods:
+    detect: "detect"
+    find: "detect"
+    inject: "inject"
+    reduce: "inject"
+
+
+# 明示的に else で nil を返すのは分かりやすいので許可する
+Style/EmptyElse:
+  EnforcedStyle: empty
+
+# 桁揃えが綺麗にならないことが多いので migration は除外
+Style/ExtraSpacing:
+  Exclude:
+    - "db/migrate/*.rb"
+
+
+# if 文の中に 3 行程度のブロックを書くぐらいは許容した方が現実的
+Style/GuardClause:
+  MinBodyLength: 5
+
+
+# 特に model 内において、ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
+Style/RedundantSelf:
+  Enabled: false
+
+
+##################### Lint ##################################
+
+# 子クラスで実装させるつもりのメソッドで引っかかるので
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+##################### Metrics ##################################
+
+# 30 まではギリギリ許せる範囲だった
+Metrics/AbcSize:
+  Max: 30
+
+# 6 は強すぎるので緩める
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# * 警告 120文字
+# * 禁止 160文字
+# のイメージ
+Metrics/LineLength:
+  Max: 160
+  Exclude:
+    - "db/migrate/*.rb"
+
+# 20 行超えるのは migration ファイル以外滅多に無い
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "db/migrate/*.rb"
+
+# 分岐の数。ガード句を多用しているとデフォルト 7 だと厳しい
+Metrics/PerceivedComplexity:
+  Max: 8

@@ -1,25 +1,82 @@
-# README
+ミニマム初期セットアップ
+```
+#Dockerfile
+FROM ruby:3.0.2
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RUN wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+RUN set -x && apt-get update -y -qq && apt-get install -yq nodejs yarn
 
-Things you may want to cover:
+RUN mkdir /app
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN bundle install
+COPY . /app
+```
 
-* Ruby version
+```
+#docker-compose.yml
+version: '3'
+services:
+  app:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    volumes:
+      - db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+volumes:
+  db-volume:
+```
+  
+```
+#Gemfile
 
-* System dependencies
+source 'https://rubygems.org'
+gem 'rails', '6.1.4'
+```
 
-* Configuration
+```
+#entrypoint.sh
 
-* Database creation
+#!/bin/bash
+set -e
 
-* Database initialization
+rm -f /myapp/tmp/pids/server.pid
 
-* How to run the test suite
+exec "$@"
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ touch Gemfile.lock
+$ rails new . --force --database=mysql
+```
 
-* Deployment instructions
+```
+#config/database.yml
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: db
+```
 
-* ...
-# rails_playground
+```
+$ docker compose build
+$ docker compose up -d
+$ docker compose exec app rails db:create
+```
