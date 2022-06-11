@@ -2,7 +2,7 @@
 
 module Api
   module V2
-    class QiitasApiCLient
+    class QiitaApiClient
       class HTTPError < StandardError
         def initialize(response)
           super "status=#{response.status} body=#{response.body}"
@@ -22,7 +22,9 @@ module Api
 
         def get_items
           response = connection.get(
-            '/api/v2/items'
+            '/api/v2/items',
+            page: 1,
+            per_page: 20
           )
           if response.success?
             response.body
@@ -30,6 +32,8 @@ module Api
             raise QiitaApiClient::HTTPError, response
           end
         end
+
+        # LGTM数が200をこえる記事を取得（https://qiita.com/api/v2/docs#%E6%8A%95%E7%A8%BF）
       end
     end
   end
