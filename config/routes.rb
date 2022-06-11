@@ -2,6 +2,9 @@
 
 Rails.application.routes.draw do
   namespace :api do
+    resources :youtubes, only: %i[index]
+  end
+  namespace :api do
     namespace :v2 do
       resources :qiitas, only: %i[index]
     end
