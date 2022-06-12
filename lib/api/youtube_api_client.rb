@@ -12,6 +12,10 @@ module Api
       @session = session
     end
 
+    #三つに分ける必要あり
+    #アクセスする準備を整えるメソッド。インスタンスを作成したり、Faradayのリクエストをしたり。
+    #リクエストを送るメソッド
+    #レスポンスを加工するメソッド
     class << self
       def find_videos(keyword, after: 1.month.ago, before: Time.zone.now)
         # グーグルアカウントで実行できるインスタンスを作成
@@ -47,6 +51,7 @@ module Api
         end
       end
 
+      #エンドポイントへリクエストを送るメソッド（一日５万件まで）
       def fetch_videos
         service.list_serches(
           'snippet',
@@ -54,6 +59,11 @@ module Api
           type: 'video',
           options: { authorization: auth_client }
         )
+      end
+
+      #ハッシュを加工する
+      def extract_video_data(**arg)
+
       end
 
       def service

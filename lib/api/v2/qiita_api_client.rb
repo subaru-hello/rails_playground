@@ -20,6 +20,17 @@ module Api
           end
         end
 
+        def get_user_id(user_id)
+          response = connection.get(
+            "/api/v2/users/#{user_id}",
+          )
+          if response.success?
+            response.body
+          else
+            raise QiitaApiClient::HTTPError, response
+          end    
+        end
+
         def get_items
           response = connection.get(
             '/api/v2/items',
@@ -33,7 +44,24 @@ module Api
           end
         end
 
-        # LGTM数が200をこえる記事を取得（https://qiita.com/api/v2/docs#%E6%8A%95%E7%A8%BF）
+        # stockしたコンテンツ取得
+        def my_stocked_contents
+          user_id = get_user_id("subaru-hello")["id"]
+          response = connection.get(
+            "/api/v2/users/#{user_id}/stocks",
+            page: 1,
+            per_page: 20
+          )
+          if response.success?
+            response = response.body
+           array =  response.map{ |res|
+              [res["title"], res["created_at"], res["url"]]
+            }
+            array
+          else
+            raise QiitaApiClient::HTTPError, response
+          end
+        end
       end
     end
   end
