@@ -22,13 +22,13 @@ module Api
 
         def get_user_id(user_id)
           response = connection.get(
-            "/api/v2/users/#{user_id}",
+            "/api/v2/users/#{user_id}"
           )
           if response.success?
             response.body
           else
             raise QiitaApiClient::HTTPError, response
-          end    
+          end
         end
 
         def get_items
@@ -46,7 +46,7 @@ module Api
 
         # stockしたコンテンツ取得
         def my_stocked_contents
-          user_id = get_user_id("subaru-hello")["id"]
+          user_id = get_user_id('subaru-hello')['id']
           response = connection.get(
             "/api/v2/users/#{user_id}/stocks",
             page: 1,
@@ -54,10 +54,10 @@ module Api
           )
           if response.success?
             response = response.body
-           array =  response.map{ |res|
-              [res["title"], res["created_at"], res["url"]]
+            response.map { |res|
+              [res['title'], res['created_at'], res['url']]
             }
-            array
+
           else
             raise QiitaApiClient::HTTPError, response
           end
