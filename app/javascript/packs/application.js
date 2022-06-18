@@ -11,3 +11,21 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+// Support component names relative to this directory:
+var componentRequireContext = require.context("components", true);
+var ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);
+
+import App from '../components/HelloWorld'
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+   
+    const container = document.getElementById('app');
+    const root = createRoot(container);
+    root.render(<App greeting="hheelloo"></App>);
+
+})

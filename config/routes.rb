@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: 'home#index'
+  # react用のルーティング
+
+  # api用のルーティング
   namespace :api do
     resources :youtubes, only: %i[index]
   end

@@ -65,6 +65,8 @@ end
 gem 'csv'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'foreman'
 gem 'google-api-client'
 gem 'nokogiri'
+gem 'react-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
