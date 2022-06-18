@@ -17,14 +17,15 @@ var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 import App from '../components/HelloWorld'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    const ele = document.getElementById('app')
+   
+    const container = document.getElementById('app');
+    const root = createRoot(container);
+    root.render(<App greeting="hheelloo"></App>);
 
-    ReactDOM.render(
-        <App greeting="Hello from react" />,
-        ele
-    )
 })
