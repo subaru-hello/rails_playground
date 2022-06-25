@@ -32,8 +32,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'annotate'
+  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 end
@@ -58,15 +62,18 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'shoulda-matchers'
   gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'csv'
+gem 'faker'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'foreman'
 gem 'google-api-client'
+gem 'net-smtp', require: false
 gem 'nokogiri'
 gem 'react-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
