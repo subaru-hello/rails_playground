@@ -24,24 +24,20 @@ module Api
           response = connection.get(
             "/api/v2/users/#{user_id}"
           )
-          if response.success?
-            response.body
-          else
-            raise QiitaApiClient::HTTPError, response
-          end
+          raise QiitaApiClient::HTTPError, response unless response.success?
+
+          response.body
         end
 
-        def get_items
+        def take_items_from_qiita
           response = connection.get(
             '/api/v2/items',
             page: 1,
             per_page: 20
           )
-          if response.success?
-            response.body
-          else
-            raise QiitaApiClient::HTTPError, response
-          end
+          raise QiitaApiClient::HTTPError, response unless response.success?
+
+          response.body
         end
 
         # stockしたコンテンツ取得
@@ -52,14 +48,13 @@ module Api
             page: 1,
             per_page: 20
           )
-          if response.success?
-            response = response.body
-            response.map { |res|
-              [res['title'], res['created_at'], res['url']]
-            }
+          raise QiitaApiClient::HTTPError, response unless response.success?
 
-          else
-            raise QiitaApiClient::HTTPError, response
+          response.body
+
+          response = response.body
+          response.map do |res|
+            [res['title'], res['created_at'], res['url']]
           end
         end
       end

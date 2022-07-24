@@ -14,12 +14,13 @@ module Playground
     config.load_defaults 6.1
     config.generators do |g| # ここから追記
       g.assets true # CSS, JavaScriptファイル生成せず
-      g.skip_routes true     # trueならroutes.rb変更せず、falseなら通常通り変更
-      g.test_framework true  # testファイル生成せず
-      g.helper true
+      g.skip_routes true # trueならroutes.rb変更せず、falseなら通常通り変更
+      g.test_framework :rspec
+      g.helper false
     end
+    # rubocop:disable Rails/FilePath
     config.paths.add "#{Rails.root}/lib", eager_load: true
-
+    # rubocop:enable Rails/FilePath
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

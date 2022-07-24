@@ -1,4 +1,5 @@
 ミニマム初期セットアップ
+
 ```
 #Dockerfile
 FROM ruby:3.0.2
@@ -40,7 +41,7 @@ services:
 volumes:
   db-volume:
 ```
-  
+
 ```
 #Gemfile
 

@@ -14,13 +14,13 @@ class Scraper
 
   def main
     @driver.navigate.to @root_path
-    get_questions
+    bring_questions
     sleep @long
 
     @driver.quit
   end
 
-  def get_questions
+  def bring_questions
     questions = @driver.find_elements(class: 'question-summary')
     questions.each do |question|
       question_text = question.find_element(class: 'question-hyperlink').text

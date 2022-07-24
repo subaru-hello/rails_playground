@@ -32,8 +32,14 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'annotate'
+  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 end
@@ -46,8 +52,6 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'spring'
 end
 
@@ -56,17 +60,18 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'pry-byebug'
-  gem 'pry-rails'
+  gem 'shoulda-matchers'
   gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'csv'
+gem 'faker'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'foreman'
 gem 'google-api-client'
+gem 'net-smtp', require: false
 gem 'nokogiri'
 gem 'react-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
