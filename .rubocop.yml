@@ -33,7 +33,6 @@ Style/BlockDelimiters:
   Exclude:
     - "spec/**/*"
 
-
 # Style/CollectionMethods 自体は無効になっているのだが、
 #   https://github.com/bbatsov/rubocop/issues/1084
 #   https://github.com/bbatsov/rubocop/issues/1334
@@ -52,7 +51,6 @@ Style/CollectionMethods:
     inject: "inject"
     reduce: "inject"
 
-
 # 明示的に else で nil を返すのは分かりやすいので許可する
 Style/EmptyElse:
   EnforcedStyle: empty
@@ -62,16 +60,13 @@ Style/ExtraSpacing:
   Exclude:
     - "db/migrate/*.rb"
 
-
 # if 文の中に 3 行程度のブロックを書くぐらいは許容した方が現実的
 Style/GuardClause:
   MinBodyLength: 5
 
-
 # 特に model 内において、ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
 Style/RedundantSelf:
   Enabled: false
-
 
 ##################### Lint ##################################
 

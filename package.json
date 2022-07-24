@@ -2,7 +2,7 @@
   "name": "playground",
   "private": true,
   "scripts": {
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
