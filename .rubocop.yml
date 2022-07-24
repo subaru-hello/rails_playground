@@ -68,6 +68,13 @@ Style/GuardClause:
 Style/RedundantSelf:
   Enabled: false
 
+# いちいちファイルの上部に説明を書くのが面倒
+Style/Documentation:
+  Enabled: false
+
+# rubocop disbleを記述した後にenableを使うのが面倒
+Lint/MissingCopEnableDirective:
+  Enabled: false
 ##################### Lint ##################################
 
 # 子クラスで実装させるつもりのメソッドで引っかかるので
