@@ -18,15 +18,17 @@ var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 import Router from "components/router/Router";
-import * as React from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
+// import { ChakraProvider } from '@chakra-ui/react'
+// import theme from 'components/theme/theme'
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("app");
   const root = createRoot(container);
   root.render(
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    // <ChakraProvider>
+    <Router />
+    // </ChakraProvider>
   );
 });
