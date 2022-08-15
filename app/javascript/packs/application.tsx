@@ -5,7 +5,6 @@
 
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
-import { BrowserRouter } from "react-router-dom";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
@@ -20,15 +19,9 @@ ReactRailsUJS.useContext(componentRequireContext);
 import Router from "components/router/Router";
 import React from "react";
 import { createRoot } from "react-dom/client";
-// import { ChakraProvider } from '@chakra-ui/react'
-// import theme from 'components/theme/theme'
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("app");
   const root = createRoot(container);
-  root.render(
-    // <ChakraProvider>
-    <Router />
-    // </ChakraProvider>
-  );
+  root.render(<Router />);
 });
