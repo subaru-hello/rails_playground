@@ -5,6 +5,7 @@ require 'active_support/all'
 
 GOOGLE_API_KEY = Rails.application.credentials.dig(:youtube, :youtube_api_key) # 上記で作成したキー
 
+# rubocop:disable Metrics/MethodLength
 module Api
   class YoutubeApiClient
     # Loginできているか確認するsession
