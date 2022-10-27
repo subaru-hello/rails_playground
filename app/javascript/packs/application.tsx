@@ -18,10 +18,15 @@ ReactRailsUJS.useContext(componentRequireContext);
 
 import Router from "components/router/Router";
 import React from "react";
+import Box from "@mui/material/Box";
 import { createRoot } from "react-dom/client";
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("app");
   const root = createRoot(container);
-  root.render(<Router />);
+  root.render(
+    <Box sx={{ justifyContent: "center" }}>
+      <Router />
+    </Box>
+  );
 });

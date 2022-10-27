@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   # api用のルーティング
   namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
     resources :youtubes, only: %i[index]
   end
   namespace :api do
